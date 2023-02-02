@@ -9,9 +9,9 @@ function App() {
   const onLoginClick = () => {
     window.FB.login();
   };
-  const getUserData = () => {
+  const getUserData = (userID,token) => {
     fetch(
-      `https://graph.facebook.com/v15.0/${userID}?access_token=${accessToken}`
+      `https://graph.facebook.com/v15.0/${userID}?access_token=${token}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -36,7 +36,7 @@ function App() {
           setIsLoggedin(true);
           setAccessToken(response.authResponse.accessToken);
           setUserID(response.authResponse.userID)
-          getUserData();
+          getUserData(response.authResponse.userID,response.authResponse.accessToken);
         }
         console.log(response);
       });
