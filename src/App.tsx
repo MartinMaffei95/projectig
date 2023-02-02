@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 function App() {
   const [pictures, setPictures] = useState<any>();
   const token = import.meta.env.VITE_IG_TOKEN;
-
+  const [accessToken, setAccessToken] = useState<any>();
   const [isLoggedin, setIsLoggedin] = useState(false);
 
   const onLoginClick = () => {
@@ -23,6 +23,7 @@ function App() {
       FB.getLoginStatus(function (response) {
         if (response.status !== 'connected') {
           setIsLoggedin(false);
+          setAccessToken(response.authResponse.accessToken);
         }
         console.log(response);
       });
