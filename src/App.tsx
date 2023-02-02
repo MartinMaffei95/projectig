@@ -22,8 +22,8 @@ function App() {
       FB.AppEvents.logPageView();
     };
 
-    (function (d, s, id) {
-      var js,
+    (function (d, s: any, id) {
+      let js,
         fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {
         return;
@@ -31,7 +31,7 @@ function App() {
       js = d.createElement(s);
       js.id = id;
       js.src = 'https://connect.facebook.net/en_US/sdk.js';
-      fjs.parentNode.insertBefore(js, fjs);
+      fjs?.parentNode?.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
   }, []);
   return (
