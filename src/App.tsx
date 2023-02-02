@@ -2,12 +2,22 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 function App() {
   const [pictures, setPictures] = useState<any>();
-  const token = import.meta.env.VITE_IG_TOKEN;
-  const [accessToken, setAccessToken] = useState<any>();
+  const [accessToken, setAccessToken] = useState<any>('');
   const [isLoggedin, setIsLoggedin] = useState(false);
 
   const onLoginClick = () => {
     window.FB.login();
+  };
+  const getUserData = () => {
+    fetch(
+      `https://graph.facebook.com/v15.0/17957962531387130?fields=id,owner,media_type,media_url,timestamp&access_token=${accessToken}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setPictures(data.data);
+      })
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
@@ -24,6 +34,7 @@ function App() {
         if (response.status !== 'connected') {
           setIsLoggedin(false);
           setAccessToken(response.authResponse.accessToken);
+          getUserData();
         }
         console.log(response);
       });
