@@ -32,7 +32,7 @@ function App() {
       FB.AppEvents.logPageView();
       FB.getLoginStatus(function (response) {
         if (response.status === 'connected') {
-          setIsLoggedin(false);
+          setIsLoggedin(true);
           setAccessToken(response.authResponse.accessToken);
           getUserData();
         }
