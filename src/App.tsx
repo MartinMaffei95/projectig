@@ -20,6 +20,12 @@ function App() {
       });
 
       FB.AppEvents.logPageView();
+      FB.getLoginStatus(function (response) {
+        if (response.status !== 'connected') {
+          setIsLoggedin(false);
+        }
+        console.log(response);
+      });
     };
 
     (function (d, s: any, id) {
@@ -38,7 +44,9 @@ function App() {
     <div className="App bg-slate-400">
       <header>Mi app de Instagram</header>
       <div>
-        <button onClick={onLoginClick}>Login with Facebook</button>
+        {isLoggedin ? null : (
+          <button onClick={onLoginClick}>Login with Facebook</button>
+        )}
       </div>
       <div className="flex flex-wrap w-screen h-screen gap-4 overflow-y-scroll">
         {pictures && pictures.length > 0
