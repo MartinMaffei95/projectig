@@ -11,7 +11,7 @@ function App() {
   };
   const getUserData = (userID: string, token: string) => {
     fetch(
-      `https://graph.facebook.com/v15.0/${userID}?fields=id,first_name,last_name,picture,gender,location&access_token=${token}`
+      `https://graph.facebook.com/v15.0/${userID}?fields=id,first_name,last_name,user_photos&access_token=${token}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -20,8 +20,10 @@ function App() {
       })
       .catch((err) => console.error(err));
   };
-  const getAccountsData = (userID: string) => {
-    fetch(`https://graph.facebook.com//v15.0/${userID}/accounts`)
+  const getAccountsData = (userID: string, token: string) => {
+    fetch(
+      `https://graph.facebook.com//v15.0/${userID}/accounts?access_token=${token}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -49,7 +51,10 @@ function App() {
             response.authResponse.userID,
             response.authResponse.accessToken
           );
-          getAccountsData(response.authResponse.userID);
+          getAccountsData(
+            response.authResponse.userID,
+            response.authResponse.accessToken
+          );
         }
         console.log(response);
       });
