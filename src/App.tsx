@@ -4,18 +4,28 @@ function App() {
   const [pictures, setPictures] = useState<any>();
   const [accessToken, setAccessToken] = useState<any>('');
   const [isLoggedin, setIsLoggedin] = useState(false);
+  const [userID, setUserID] = useState<any>('');
 
   const onLoginClick = () => {
     window.FB.login();
   };
-  const getUserData = () => {
+  const getUserData = (userID: string, token: string) => {
     fetch(
-      `https://graph.facebook.com/v15.0/17957962531387130?fields=id,owner,media_type,media_url,timestamp&access_token=${accessToken}`
+      `https://graph.facebook.com/v15.0/${userID}?fields=id,first_name,last_name,picture,gender,location&access_token=${token}`
     )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setPictures(data.data);
+        // setPictures(data.data);
+      })
+      .catch((err) => console.error(err));
+  };
+  const getAccountsData = (userID: string) => {
+    fetch(`https://graph.facebook.com//v15.0/${userID}/accounts`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        // setPictures(data.data);
       })
       .catch((err) => console.error(err));
   };
@@ -31,10 +41,15 @@ function App() {
 
       FB.AppEvents.logPageView();
       FB.getLoginStatus(function (response) {
-        if (response.status !== 'connected') {
-          setIsLoggedin(false);
+        if (response.status === 'connected') {
+          setIsLoggedin(true);
           setAccessToken(response.authResponse.accessToken);
-          getUserData();
+          setUserID(response.authResponse.userID);
+          getUserData(
+            response.authResponse.userID,
+            response.authResponse.accessToken
+          );
+          getAccountsData(response.authResponse.userID);
         }
         console.log(response);
       });
