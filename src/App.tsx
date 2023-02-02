@@ -9,7 +9,7 @@ function App() {
   const onLoginClick = () => {
     window.FB.login();
   };
-  const getUserData = (userID,token) => {
+  const getUserData = (userID:string,token:string) => {
     fetch(
       `https://graph.facebook.com/v15.0/${userID}?access_token=${token}`
     )
