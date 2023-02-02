@@ -4,13 +4,14 @@ function App() {
   const [pictures, setPictures] = useState<any>();
   const [accessToken, setAccessToken] = useState<any>('');
   const [isLoggedin, setIsLoggedin] = useState(false);
+  const [userID,setUserID] = useState<any>('')
 
   const onLoginClick = () => {
     window.FB.login();
   };
   const getUserData = () => {
     fetch(
-      `https://graph.facebook.com/v15.0/17957962531387130?fields=id,owner,media_type,media_url,timestamp&access_token=${accessToken}`
+      `https://graph.facebook.com/v15.0/${userID}?fields=id,owner,media_type,media_url,timestamp&access_token=${accessToken}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -34,6 +35,7 @@ function App() {
         if (response.status === 'connected') {
           setIsLoggedin(true);
           setAccessToken(response.authResponse.accessToken);
+          setUserID(response.authResponse.userID)
           getUserData();
         }
         console.log(response);
