@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-
+import { useState } from 'react';
+import { useEffect } from 'react';
 function App() {
   const [pictures, setPictures] = useState<any>();
   const token = import.meta.env.VITE_IG_TOKEN;
