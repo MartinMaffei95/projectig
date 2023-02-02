@@ -11,7 +11,7 @@ function App() {
   };
   const getUserData = () => {
     fetch(
-      `https://graph.facebook.com/v15.0/${userID}?fields=id,owner,media_type,media_url,timestamp&access_token=${accessToken}`
+      `https://graph.facebook.com/v15.0/${userID}?access_token=${accessToken}`
     )
       .then((res) => res.json())
       .then((data) => {
