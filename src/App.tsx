@@ -95,7 +95,7 @@ function App() {
   };
   const testdata = () => {
     fetch(
-      `https://graph.facebook.com/v16.0/me/accounts?fields=id,name,access_token,instagram_business_account&access_token=${IGToken}`
+      `https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=${IGToken}`
     )
       .then((res) => res.json())
       .then((data) => {
