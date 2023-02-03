@@ -33,7 +33,7 @@ function App() {
           console.log('User cancelled login or did not fully authorize.');
         }
       },
-      { scope: 'email,user_likes' }
+      { scope: 'email,user_likes', return_scopes: true }
     );
   };
   const getUserData = (userID: string, token: string) => {
@@ -71,7 +71,7 @@ function App() {
         xfbml: true,
         version: 'v15.0',
       });
-      // console.log(FB.AppEvents.logPageView());
+      FB.AppEvents.logPageView();
 
       // get our login status for render buttons and actions
       FB.getLoginStatus(function (response) {
