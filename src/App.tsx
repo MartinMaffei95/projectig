@@ -79,7 +79,7 @@ function App() {
     // ('asset_id=103540885991148&business_id=910034690412464');
     // https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=
 
-    `https://graph.instagram.com/v16.0/${userData?.id}?fields=id,username&access_token=${IGToken}`;
+    // `https://graph.instagram.com/v16.0/${userData?.id}?fields=id,username&access_token=${IGToken}`;
     //
     fetch(
       `https://graph.facebook.com/${userData?.id}?fields=profile_picture_url%2Cusername%2Cname&access_token=${IGToken}`
@@ -218,7 +218,7 @@ function App() {
         URL PERSONALIZADA
       </button>
 
-      <div className="flex flex-col mt-4 bg-slate-600 text-white">
+      <div className="flex flex-col mt-4 overflow-scroll bg-slate-600 text-white">
         <p>accessToken: {accessToken}</p>
         <p>IGToken: {IGToken}</p>
         <p>isLoggedin: {isLoggedin}</p>
