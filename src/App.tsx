@@ -66,7 +66,9 @@ function App() {
     //www.facebook.com/dialog/oauth?client_id=$422187410098220&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://projectig.vercel.app/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement
     // ('asset_id=103540885991148&business_id=910034690412464');
     // https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=
-    fetch(`https://graph.facebook.com/v16.0/me/?access_token=${token}`)
+    fetch(
+      `accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=${token}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log('IG: ', data);
