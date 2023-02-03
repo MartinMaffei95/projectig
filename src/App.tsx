@@ -95,7 +95,7 @@ function App() {
   };
   const testdata = () => {
     fetch(
-      `https://graph.facebook.com/v15.0/me/accounts?access_token=${IGToken}`
+      `https://graph.facebook.com/v16.0/me/accounts?fields=id,name,access_token,instagram_business_account&access_token=${IGToken}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -191,9 +191,6 @@ function App() {
         DATAAA
       </button>
 
-      <button onClick={() => getMyProfileIG(IGToken)}>
-        AVERLASFOTOSSSSSSSD
-      </button>
       <div className="flex flex-wrap w-screen h-screen gap-4 overflow-y-scroll">
         {pictures && pictures.length > 0
           ? pictures.map((p: any) => (
