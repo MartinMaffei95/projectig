@@ -6,6 +6,7 @@ function App() {
   const [IGToken, setIGToken] = useState<any>('');
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [userID, setUserID] = useState<any>('');
+  const [userData, setUserData] = useState<any>();
 
   const getIGuserdata = (userID: string, token: string) => {
     // `https://graph.facebook.com/${userID}?fields=profile_picture_url%2Cusername%2Cname&access_token=${token}`;
@@ -61,18 +62,18 @@ function App() {
       .catch((err) => console.error(err));
   };
 
-  const getMyProfileIG = (token: string) => {
+  const getMyProfileIG = () => {
     // `https://graph.facebook.com/${userID}?fields=profile_picture_url%2Cusername%2Cname&access_token=${token}`;
     //www.facebook.com/dialog/oauth?client_id=$422187410098220&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://projectig.vercel.app/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement
     // ('asset_id=103540885991148&business_id=910034690412464');
     // https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=
     fetch(
-      `https://graph.facebook.com/v16.0/me/accounts?fields=id,name,access_token,instagram_business_account&access_token=${token}`
+      `https://graph.facebook.com/v16.0/me/accounts?fields=id,name,access_token,instagram_business_account&access_token=${IGToken}`
     )
       .then((res) => res.json())
       .then((data) => {
         console.log('IG: ', data);
-        // setPictures(data.data);
+        setUserData(data);
       })
       .catch((err) => console.error(err));
   };
@@ -101,6 +102,9 @@ function App() {
       .then((data) => {
         console.log('cuentas del user: ', data);
         // setPictures(data.data);
+        {
+          `https://graph.instagram.com/v16.0/${data}?fields=id,username&access_token=${IGToken}`;
+        }
       })
       .catch((err) => console.error(err));
   };
@@ -191,6 +195,9 @@ function App() {
         DATAAA
       </button>
 
+      <button className="bg-rose-500 p2 text-white" onClick={getMyProfileIG}>
+        DATAAA
+      </button>
       <div className="flex flex-wrap w-screen h-screen gap-4 overflow-y-scroll">
         {pictures && pictures.length > 0
           ? pictures.map((p: any) => (
