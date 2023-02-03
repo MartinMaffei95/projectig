@@ -8,12 +8,10 @@ function App() {
 
   const getIGuserdata = (userID: string, token: string) => {
     // `https://graph.facebook.com/${userID}?fields=profile_picture_url%2Cusername%2Cname&access_token=${token}`;
-    //`https://graph.facebook.com/v16.0/me/accounts?access_token=${token}`
+    //www.facebook.com/dialog/oauth?client_id=$422187410098220&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://projectig.vercel.app/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement
     ('asset_id=103540885991148&business_id=910034690412464');
     // https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=
-    fetch(
-      `https://graph.facebook.com/${userID}?fields=profile_picture_url%2Cusername%2Cname&access_token=${token}`
-    )
+    fetch(`https://graph.facebook.com/v16.0/me/accounts?access_token=${token}`)
       .then((res) => res.json())
       .then((data) => {
         console.log('IG: ', data);
@@ -152,14 +150,12 @@ function App() {
       <button onClick={getMsgs}>getMsgs</button>
       <div className="flex flex-col">
         <a
-          target="_blank"
           className="bg-pink-500 p2 text-white"
-          href={`https://www.facebook.com/v16.0/dialog/oauth?client_id=422187410098220&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://my-clever-redirect-url.com/success/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement,instagram_manage_messages,pages_manage_metadata`}
+          href={`www.facebook.com/dialog/oauth?client_id=$422187410098220&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://projectig.vercel.app/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement`}
         >
           ENTRAR CON IG
         </a>
         <a
-          target="_blank"
           className="bg-blue-500 p2 text-white"
           href={`https://www.facebook.com/v16.0/dialog/oauth?client_id=422187410098220&redirect_uri=https://projectig.vercel.app/&state={"{st=state123abc,ds=123456789}"}`}
         >
