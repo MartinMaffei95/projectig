@@ -44,6 +44,12 @@ function App() {
       .catch((err) => console.error(err));
   };
 
+  const logOut = () => {
+    window?.FB?.logout((res) => {
+      console.log(res);
+    });
+    setIsLoggedin(false);
+  };
   useEffect(() => {
     window.fbAsyncInit = function () {
       FB.init({
@@ -52,8 +58,8 @@ function App() {
         xfbml: true,
         version: 'v15.0',
       });
+      console.log(FB.AppEvents.logPageView());
 
-      FB.AppEvents.logPageView();
       FB.getLoginStatus(function (response) {
         if (response.status === 'connected') {
           setIsLoggedin(true);
@@ -93,8 +99,14 @@ function App() {
     <div className="App bg-slate-200 p-4">
       <header>Mi app de Instagram</header>
       <div>
-        {isLoggedin ? null : (
-          <button onClick={onLoginClick}>Login with Facebook</button>
+        {isLoggedin ? (
+          <button className="bg-red-400" onClick={() => logOut()}>
+            CERRAR SEESISON
+          </button>
+        ) : (
+          <button className="bg-blue-500 p2 text-white" onClick={onLoginClick}>
+            Login with Facebook
+          </button>
         )}
       </div>
       <div className="flex flex-col">
