@@ -33,7 +33,7 @@ function App() {
           console.log('User cancelled login or did not fully authorize.');
         }
       },
-      { scope: 'email,user_likes', return_scopes: true }
+      { scope: 'email, public_profile.', return_scopes: true }
     );
   };
   const getUserData = (userID: string, token: string) => {
