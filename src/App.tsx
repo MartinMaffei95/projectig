@@ -151,7 +151,7 @@ function App() {
       <div className="flex flex-col">
         <a
           className="bg-pink-500 p2 text-white"
-          href={`https://www.facebook.com/v16.0/dialog/oauth?client_id=422187410098220&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://projectig.vercel.app/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement`}
+          href={`https://www.facebook.com/v16.0/dialog/oauth?client_id=422187410098220&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://projectig.vercel.app/&response_type=token&scope=instagram_basic`}
         >
           ENTRAR CON IG
         </a>
