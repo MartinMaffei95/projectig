@@ -21,7 +21,20 @@ function App() {
   };
 
   const onLoginClick = () => {
-    window.FB.login();
+    window.FB.login(
+      function (response) {
+        if (response.authResponse) {
+          console.log('Welcome!  Fetching your information.... ');
+          FB.api('/me', function (response) {
+            // console.log('Good to see you, ' + response + '.');
+            console.log('res of FBAPI:', response);
+          });
+        } else {
+          console.log('User cancelled login or did not fully authorize.');
+        }
+      },
+      { scope: 'email,user_likes' }
+    );
   };
   const getUserData = (userID: string, token: string) => {
     fetch(
@@ -58,8 +71,9 @@ function App() {
         xfbml: true,
         version: 'v15.0',
       });
-      console.log(FB.AppEvents.logPageView());
+      // console.log(FB.AppEvents.logPageView());
 
+      // get our login status for render buttons and actions
       FB.getLoginStatus(function (response) {
         if (response.status === 'connected') {
           setIsLoggedin(true);
