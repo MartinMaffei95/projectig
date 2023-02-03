@@ -8,6 +8,17 @@ function App() {
   const [userID, setUserID] = useState<any>('');
   const [userData, setUserData] = useState<any>();
 
+  const [url, setUrl] = useState<any>('');
+  const getURL = () => {
+    fetch(`${url}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('IG: ', data);
+        setUserData(data);
+      })
+      .catch((err) => console.error(err));
+  };
+
   const getIGuserdata = (userID: string, token: string) => {
     // `https://graph.facebook.com/${userID}?fields=profile_picture_url%2Cusername%2Cname&access_token=${token}`;
     //www.facebook.com/dialog/oauth?client_id=$422187410098220&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://projectig.vercel.app/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement
@@ -67,8 +78,11 @@ function App() {
     //www.facebook.com/dialog/oauth?client_id=$422187410098220&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://projectig.vercel.app/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement
     // ('asset_id=103540885991148&business_id=910034690412464');
     // https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=
+
+    `https://graph.instagram.com/v16.0/${userData?.id}?fields=id,username&access_token=${IGToken}`;
+    //
     fetch(
-      `https://graph.facebook.com/v16.0/me/accounts?fields=id,name,access_token,instagram_business_account&access_token=${IGToken}`
+      `https://graph.facebook.com/${userData?.id}?fields=profile_picture_url%2Cusername%2Cname&access_token=${IGToken}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -98,11 +112,8 @@ function App() {
     fetch(`https://graph.facebook.com/v16.0/me/?access_token=${IGToken}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log('cuenta ig: ', data);
-        // setPictures(data.data);
-        {
-          `https://graph.instagram.com/v16.0/${data}?fields=id,username&access_token=${IGToken}`;
-        }
+        console.log('cuenta: ', data);
+        setUserData(data);
       })
       .catch((err) => console.error(err));
   };
@@ -196,6 +207,25 @@ function App() {
       <button className="bg-rose-500 p2 text-white" onClick={getMyProfileIG}>
         DATAAA
       </button>
+
+      <input
+        onChange={(e) => {
+          setUrl(e.target.value);
+        }}
+        value={url}
+      />
+      <button className="bg-orange-500 p4 text-white" onClick={getURL}>
+        URL PERSONALIZADA
+      </button>
+
+      <div className="flex flex-col mt-4 bg-slate-600 text-white">
+        <p>accessToken: {accessToken}</p>
+        <p>IGToken: {IGToken}</p>
+        <p>isLoggedin: {isLoggedin}</p>
+        <p>userID: {userID}</p>
+        <p>userData: {userData}</p>
+        <p>url: {url}</p>
+      </div>
       <div className="flex flex-wrap w-screen h-screen gap-4 overflow-y-scroll">
         {pictures && pictures.length > 0
           ? pictures.map((p: any) => (
