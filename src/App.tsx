@@ -34,8 +34,7 @@ function App() {
         }
       },
       {
-        scope:
-          'email,public_profile,instagram_basic,instagram_manage_messages,pages_manage_metadata',
+        scope: 'email,user_hometown,user_likes,user_gender',
         return_scopes: true,
       }
     );
