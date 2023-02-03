@@ -33,7 +33,11 @@ function App() {
           console.log('User cancelled login or did not fully authorize.');
         }
       },
-      { scope: 'email, public_profile', return_scopes: true }
+      {
+        scope:
+          'email,public_profile,instagram_basic,instagram_manage_messages,pages_manage_metadata',
+        return_scopes: true,
+      }
     );
   };
   const getUserData = (userID: string, token: string) => {
@@ -62,6 +66,18 @@ function App() {
       console.log(res);
     });
     setIsLoggedin(false);
+  };
+
+  const testdata = () => {
+    fetch(
+      `https://graph.facebook.com/v15.0/me/accounts?access_token=${accessToken}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('cuentas del user: ', data);
+        // setPictures(data.data);
+      })
+      .catch((err) => console.error(err));
   };
   useEffect(() => {
     window.fbAsyncInit = function () {
@@ -139,6 +155,9 @@ function App() {
           ENTRAR CON FB
         </a>
       </div>
+      <button className="bg-green-500 p2 text-white" onClick={testdata}>
+        DATAAA
+      </button>
       <div className="flex flex-wrap w-screen h-screen gap-4 overflow-y-scroll">
         {pictures && pictures.length > 0
           ? pictures.map((p: any) => (
