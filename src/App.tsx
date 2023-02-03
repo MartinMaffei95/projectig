@@ -95,12 +95,10 @@ function App() {
     });
   };
   const testdata = () => {
-    fetch(
-      `https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=${IGToken}`
-    )
+    fetch(`https://graph.facebook.com/v16.0/me/?access_token=${IGToken}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log('cuentas del user: ', data);
+        console.log('cuenta ig: ', data);
         // setPictures(data.data);
         {
           `https://graph.instagram.com/v16.0/${data}?fields=id,username&access_token=${IGToken}`;
