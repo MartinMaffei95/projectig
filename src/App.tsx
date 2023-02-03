@@ -6,6 +6,10 @@ function App() {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [userID, setUserID] = useState<any>('');
 
+  const igLogin = () => {
+    `https://www.facebook.com/dialog/oauth?client_id={client-id}&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://projectig.vercel.app/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement`;
+  };
+
   const onLoginClick = () => {
     window.FB.login();
   };
@@ -70,14 +74,21 @@ function App() {
       fjs?.parentNode?.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
   }, []);
+
   return (
-    <div className="App bg-slate-400">
+    <div className="App bg-slate-200 p-4">
       <header>Mi app de Instagram</header>
       <div>
         {isLoggedin ? null : (
           <button onClick={onLoginClick}>Login with Facebook</button>
         )}
       </div>
+      <a
+        className="bg-pink-500 p2 text-white"
+        href={`https://www.facebook.com/v16.0/dialog/oauth?client_id=422187410098220&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://my-clever-redirect-url.com/success/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement`}
+      >
+        ENTRAR CON IG
+      </a>
       <div className="flex flex-wrap w-screen h-screen gap-4 overflow-y-scroll">
         {pictures && pictures.length > 0
           ? pictures.map((p: any) => (
