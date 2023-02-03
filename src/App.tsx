@@ -8,10 +8,12 @@ function App() {
 
   const getIGuserdata = (userID: string, token: string) => {
     // `https://graph.facebook.com/${userID}?fields=profile_picture_url%2Cusername%2Cname&access_token=${token}`;
-
+    //`https://graph.facebook.com/v16.0/me/accounts?access_token=${token}`
     ('asset_id=103540885991148&business_id=910034690412464');
     // https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=
-    fetch(`https://graph.facebook.com/v16.0/me/accounts?access_token=${token}`)
+    fetch(
+      `https://graph.facebook.com/${userID}?fields=profile_picture_url%2Cusername%2Cname&access_token=${token}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log('IG: ', data);
