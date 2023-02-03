@@ -35,7 +35,7 @@ function App() {
       .catch((err) => console.error(err));
   };
   const getAccountsData = (userID: string, token: string) => {
-    fetch(`https://graph.facebook.com//v15.0/me/accounts?access_token=${token}`)
+    fetch(`https://graph.facebook.com/v15.0/me/accounts?access_token=${token}`)
       .then((res) => res.json())
       .then((data) => {
         console.log('cuentas del user: ', data);
