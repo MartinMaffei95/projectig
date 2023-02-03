@@ -7,8 +7,10 @@ function App() {
   const [userID, setUserID] = useState<any>('');
 
   const getIGuserdata = (userID: string, token: string) => {
-    `https://graph.facebook.com/${userID}?fields=profile_picture_url%2Cusername%2Cname&access_token=${token}`;
+    // `https://graph.facebook.com/${userID}?fields=profile_picture_url%2Cusername%2Cname&access_token=${token}`;
+    `https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=${token}`;
     ('asset_id=103540885991148&business_id=910034690412464');
+    // https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=
   };
 
   const onLoginClick = () => {
@@ -55,6 +57,10 @@ function App() {
             response.authResponse.accessToken
           );
           getAccountsData(
+            response.authResponse.userID,
+            response.authResponse.accessToken
+          );
+          getIGuserdata(
             response.authResponse.userID,
             response.authResponse.accessToken
           );
