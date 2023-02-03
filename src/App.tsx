@@ -67,6 +67,15 @@ function App() {
     setIsLoggedin(false);
   };
 
+  const getMsgs = () => {
+    /* make the API call */
+    window?.FB.api('/100090086917275/conversations', function (response: any) {
+      if (response && !response.error) {
+        /* handle the result */
+        console.log(response);
+      }
+    });
+  };
   const testdata = () => {
     fetch(
       `https://graph.facebook.com/v15.0/me/accounts?access_token=${accessToken}`
@@ -138,6 +147,7 @@ function App() {
           </button>
         )}
       </div>
+      <button onClick={getMsgs}>getMsgs</button>
       <div className="flex flex-col">
         <a
           target="_blank"
