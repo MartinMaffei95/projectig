@@ -12,7 +12,7 @@ function App() {
     ('asset_id=103540885991148&business_id=910034690412464');
     // https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=
     fetch(
-      `https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=${token}`
+      `https://graph.facebook.com/v16.0/me/accounts?fields=id,name,access_token,instagram_business_account&access_token=${token}`
     )
       .then((res) => res.json())
       .then((data) => {
