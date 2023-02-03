@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 function App() {
   const [pictures, setPictures] = useState<any>();
   const [accessToken, setAccessToken] = useState<any>('');
+  const [IGToken, setIGToken] = useState<any>('');
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [userID, setUserID] = useState<any>('');
 
@@ -55,6 +56,20 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         console.log('cuentas del user: ', data);
+        // setPictures(data.data);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const getMyProfileIG = (token: string) => {
+    // `https://graph.facebook.com/${userID}?fields=profile_picture_url%2Cusername%2Cname&access_token=${token}`;
+    //www.facebook.com/dialog/oauth?client_id=$422187410098220&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://projectig.vercel.app/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement
+    // ('asset_id=103540885991148&business_id=910034690412464');
+    // https://graph.facebook.com/v16.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=
+    fetch(`https://graph.facebook.com/v16.0/me/?access_token=${token}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('IG: ', data);
         // setPictures(data.data);
       })
       .catch((err) => console.error(err));
@@ -131,8 +146,15 @@ function App() {
       js.src = 'https://connect.facebook.net/en_US/sdk.js';
       fjs?.parentNode?.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
+    setIGToken(getTokenString(window.location.href));
+
+    IGToken;
   }, []);
 
+  const getTokenString = (href: string) => {
+    let arrOfString = href.split('long_lived_token=');
+    return arrOfString[1];
+  };
   return (
     <div className="App bg-slate-200 p-4">
       <header>Mi app de Instagram</header>
@@ -165,6 +187,10 @@ function App() {
       </div>
       <button className="bg-green-500 p2 text-white" onClick={testdata}>
         DATAAA
+      </button>
+
+      <button onClick={() => getMyProfileIG(IGToken)}>
+        AVERLASFOTOSSSSSSSD
       </button>
       <div className="flex flex-wrap w-screen h-screen gap-4 overflow-y-scroll">
         {pictures && pictures.length > 0
